@@ -2,35 +2,6 @@
 
 ---
 
-## concepts
-
-### cmd vs entrypoint
-
-| | cmd | entrypoint |
-|---|---|---|
-| purpose | default arguments, can be overridden | fixed executable, always runs |
-| override | fully replaced by `docker run <args>` | arguments are appended, not replaced |
-| use case | default values | the main process of the container |
-
-**example:**
-```dockerfile
-entrypoint ["java", "-jar"]
-cmd ["app.jar"]
-```
-running `docker run my-app other.jar` executes: `java -jar other.jar`
-
----
-
-### copy vs add
-
-| | copy | add |
-|---|---|---|
-| copies files | yes | yes |
-| extracts archives | no | yes |
-| downloads from url | no | yes |
-| recommended | yes (default choice) | only when extra features needed |
-
----
 
 ## problem 1 — hello-world container
 
