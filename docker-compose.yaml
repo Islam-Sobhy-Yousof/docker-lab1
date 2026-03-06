@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - pgdata:/var/lib/postgresql
+    networks:
+      - mynetwork
+
+  app:
+    image: eclipse-temurin:21-alpine
+    networks:
+      - mynetwork
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+
+networks:
+  mynetwork:
