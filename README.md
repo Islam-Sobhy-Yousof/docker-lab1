@@ -122,30 +122,3 @@ docker run my-python-app
 ```
 
 **output:** `hello from python container!`
-
----
-
-### bonus — multi-stage dockerfile (smaller image)
-
-```dockerfile
-from python:3.11-alpine as builder
-workdir /app
-copy app.py .
-
-from python:3.11-alpine
-workdir /app
-copy --from=builder /app/app.py .
-cmd ["python", "app.py"]
-```
-
-```bash
-# build smaller image
-docker build -t my-python-app-small .
-
-# compare sizes
-docker images | grep my-python-app
-```
-
-**base image size:** `20.4mb`
-
-> multi-stage builds shine more with compiled languages like java — where you need a full jdk to build but only a jre to run, significantly reducing the final image size.
